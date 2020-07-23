@@ -16,19 +16,23 @@ from math import log, e
 from sklearn.linear_model import LinearRegression
 from numpy.linalg import eig
 
-from utils import *
+from tslb.src.lzw import *
+from tslb.src.utils import *
 
 def import_data():
-    df = pd.read_csv("data/sleep_data.csv", header=None)
+    df = pd.read_csv("../data/sleep_data.csv", header=None)
     df = df[0].str.split(" ", expand = True)
     df.columns = ["heart_rate", "sleep", "temperature"]
     return df
 
 def plot_data(data):
     plt.title("Sleep Data")
+    # plt.scatter(np.arange(len(data)),data, marker='.')
     plt.plot(data, marker='.')
     plt.xlabel("time")
     plt.ylabel("sleep status")
+    plt.yticks([1,2,3,4])
+    plt.savefig("result/sleep_data.pdf", format='pdf')
     plt.show()
 
 
@@ -80,14 +84,18 @@ def main():
     print("*******************************************************")
     print("*******************************************************")
     print("********** Running the Testing Scripts. ***************")
+    
+    plt.rcParams.update({'font.size': 14})
+    plt.rcParams.update({'figure.autolayout': True})
 
     df = import_data()
     data = df.sleep
     n = len(np.unique(data))
     print("n=", n)
+    data = data.astype(int)
 
     plot_data(data)
-    run_test(data, n)
+    # run_test(data, n)
 
     print("********** Testing Scripts Done. **********************")
     print("*******************************************************")

@@ -79,6 +79,9 @@ def discretize(seq, bins):
 
     return np.array(discretized_seq), categories
 
+def cut(seq, categories):
+    return pd.cut(seq, categories, labels=np.arange(0, len(categories)-1), retbins=True)
+
 # def discretized_p(dist, param, n):
 #     len = 10000000
 #     samples, categories = discretize(get_sequence(dist, param, len),n)

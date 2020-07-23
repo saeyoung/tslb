@@ -166,6 +166,9 @@ def h_inverse(H, n, a=0.001):
         count += 1
     return p_hat
 
+def get_error(seq1, seq2):
+    return np.mean(seq1 != seq2)
+
 
 
 # # Fano's, approximation
